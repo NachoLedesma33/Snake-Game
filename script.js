@@ -115,25 +115,24 @@ const setDirection = (newDirection) => {
 };
 
 const directionEvent = (key) => {
+  // Prevenir scroll de la página
+  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(key.code)) {
+    key.preventDefault();
+    key.stopPropagation();
+  }
+
   switch (key.code) {
     case "ArrowUp":
       direction != "ArrowDown" && setDirection(key.code);
-
       break;
-
     case "ArrowDown":
       direction != "ArrowUp" && setDirection(key.code);
-
       break;
-
     case "ArrowLeft":
       direction != "ArrowRight" && setDirection(key.code);
-
       break;
-
     case "ArrowRight":
       direction != "ArrowLeft" && setDirection(key.code);
-
       break;
   }
 };
@@ -206,3 +205,55 @@ const startGame = () => {
 };
 
 startButton.addEventListener("click", startGame);
+
+// Sistema de detección de colisión del footer
+const footerCollisionDetector = () => {
+  const footer = document.querySelector(".game-footer");
+  const gameContainer = document.querySelector(".game-container");
+  const instructionsCard = document.querySelector(".instructions-card");
+
+  if (!footer || !gameContainer || !instructionsCard) return;
+
+  const footerRect = footer.getBoundingClientRect();
+  const gameContainerRect = gameContainer.getBoundingClientRect();
+  const instructionsCardRect = instructionsCard.getBoundingClientRect();
+
+  // Detectar si el footer colisiona con el contenido
+  const collidesWithGame = footerRect.top < gameContainerRect.bottom;
+  const collidesWithCard =
+    instructionsCardRect && footerRect.top < instructionsCardRect.bottom;
+
+  if (collidesWithGame || collidesWithCard) {
+    // Ocultar footer si colisiona
+    footer.style.opacity = "0";
+    footer.style.transform = "translateY(100%)";
+    footer.style.transition = "all 0.3s ease";
+  } else {
+    // Mostrar footer si no colisiona
+    footer.style.opacity = "1";
+    footer.style.transform = "translateY(0)";
+    footer.style.transition = "all 0.3s ease";
+  }
+};
+
+// Monitorear cambios en el viewport
+const setupFooterCollisionDetection = () => {
+  // Detectar en tiempo real
+  window.addEventListener("resize", footerCollisionDetector);
+  window.addEventListener("scroll", footerCollisionDetector);
+
+  // Detectar cambios de zoom
+  let zoomLevel = window.devicePixelRatio;
+  const zoomDetector = setInterval(() => {
+    if (window.devicePixelRatio !== zoomLevel) {
+      zoomLevel = window.devicePixelRatio;
+      footerCollisionDetector();
+    }
+  }, 500);
+
+  // Verificación inicial
+  setTimeout(footerCollisionDetector, 100);
+};
+
+// Iniciar el sistema cuando se carga la página
+document.addEventListener("DOMContentLoaded", setupFooterCollisionDetection);
