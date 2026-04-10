@@ -1,29 +1,96 @@
-<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Snake Game</title>
+
     <link rel="icon" type="image/png" href="./pics/icons8-serpiente-96.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@500&family=Roboto:wght@900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@500&family=Roboto:wght@900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+
     <link href="styles.css" rel="stylesheet" />
+
     <script src="script.js" type="text/javascript" defer></script>
-</head>
+  </head>
 
-<body>
-    <div id="board"></div>
-    <div class="boardInfo">
-        <div>
+  <body>
+    <div class="main-wrapper">
+      <div class="game-container">
+        <h1 class="game-title">Snake Game</h1>
+
+        <div id="board"></div>
+
+        <div class="boardInfo">
+          <div class="score-container">
             Score:
-            <div id="scoreBoard"></div>
-        </div>
-        <button id="start">Start</button>
-    </div>
-    <div id="gameOver">Game Over</div>
-</body>
+            <div id="scoreBoard">0</div>
+          </div>
 
+          <button id="start" type="button">Start</button>
+        </div>
+
+        <div id="gameOver">Game Over</div>
+      </div>
+
+      <div class="instructions-card">
+        <h2 class="instructions-title">¿Cómo Jugar?</h2>
+
+        <div class="instructions-content">
+          <div class="controls-section">
+            <h3>Controles</h3>
+            <div class="control-item">
+              <span class="key">Arrow Up</span>
+              <span>Mover hacia arriba</span>
+            </div>
+            <div class="control-item">
+              <span class="key">Arrow Down</span>
+              <span>Mover hacia abajo</span>
+            </div>
+            <div class="control-item">
+              <span class="key">Arrow Left</span>
+              <span>Mover hacia la izquierda</span>
+            </div>
+            <div class="control-item">
+              <span class="key">Arrow Right</span>
+              <span>Mover hacia la derecha</span>
+            </div>
+          </div>
+
+          <div class="objective-section">
+            <h3>Objetivo</h3>
+            <p class="objective-text">
+              Controla la serpiente para comer la comida roja y crecer lo más
+              posible. ¡No choques contra las paredes o contra tu propio cuerpo!
+            </p>
+          </div>
+
+          <div class="tips-section">
+            <h3>Consejos</h3>
+            <ul class="tips-list">
+              <li>Planifica tus movimientos con anticipación</li>
+              <li>No te acerques demasiado a los bordes</li>
+              <li>La comida aparece en lugares aleatorios</li>
+              <li>Cada comida hace que la serpiente crezca</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="game-footer">
+      <p>Creado por <strong>Nacho Ledesma</strong></p>
+      <p>2024 - Snake Game - Todos los derechos reservados</p>
+    </footer>
+  </body>
 </html>
